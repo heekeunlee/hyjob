@@ -68,18 +68,9 @@
   body.locked{overflow:hidden}
 </style>
 </head>
-<body class="locked">
+<body>
 
-<div id="lock"><div class="lockbox">
-  <div class="lk-logo">hy</div>
-  <h1 style="font-size:17px">잠금 화면</h1>
-  <p style="color:var(--muted);font-size:12.5px;margin-top:4px">4자리 PIN을 입력하세요</p>
-  <input id="pin" type="password" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="••••" />
-  <button id="unlock">열기</button>
-  <div id="lkmsg"></div>
-</div></div>
-
-<div class="wrap gate-hidden">
+<div class="wrap">
   <header class="top">
     <div class="brand">
       <div class="logo">hy</div>
@@ -259,16 +250,5 @@
   <footer>hy 경력채용 모집분야 통합 분석표 + 이력 교차(Wafer Bonding) · 첨부 J/D 4종 전수 반영 · 회사명 마스킹(hy) · 정성 추정(비공식) · 2026-07-01</footer>
 </div>
 
-<script>
-  const PIN="0001";
-  const lock=document.getElementById('lock'), wrap=document.querySelector('.wrap'),
-        pin=document.getElementById('pin'), msg=document.getElementById('lkmsg');
-  function open_(){lock.classList.add('gate-hidden');wrap.classList.remove('gate-hidden');document.body.classList.remove('locked');}
-  function unlock(){ if(pin.value===PIN){sessionStorage.setItem('hy_ok','1');open_();}
-    else{msg.textContent="PIN이 올바르지 않습니다.";pin.value="";pin.focus();} }
-  if(sessionStorage.getItem('hy_ok')==='1'){open_();} else {setTimeout(()=>pin.focus(),100);}
-  document.getElementById('unlock').addEventListener('click',unlock);
-  pin.addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});
-</script>
 </body>
 </html>
