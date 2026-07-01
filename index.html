@@ -6,10 +6,10 @@
 <title>hy 경력채용 · 모집분야 전체 J/D 통합 분석표</title>
 <style>
   :root{
-    --bg:#0d1117; --panel:#161b22; --panel2:#1c232d; --border:#2a323c;
-    --text:#e6edf3; --muted:#9aa7b4; --accent:#58a6ff; --accent2:#3fb950;
-    --warn:#d29922; --danger:#f85149; --chip:#21262d;
-    --grad:linear-gradient(135deg,#1f6feb 0%,#3fb950 100%);
+    --bg:#f6f8fa; --panel:#ffffff; --panel2:#eef1f4; --border:#d0d7de;
+    --text:#1f2328; --muted:#57606a; --accent:#0969da; --accent2:#1a7f37;
+    --warn:#9a6700; --danger:#cf222e; --chip:#eef1f4;
+    --grad:linear-gradient(135deg,#1f6feb 0%,#2da44e 100%);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",Roboto,"Malgun Gothic",sans-serif;
@@ -24,26 +24,26 @@
   a.back{display:inline-block;margin-top:10px;color:var(--accent);font-size:13px;text-decoration:none}
   h2.sec{font-size:18px;margin:28px 0 8px;font-weight:700;display:flex;align-items:center;gap:8px}
   h2.sec::before{content:"";width:4px;height:18px;background:var(--grad);border-radius:3px;display:inline-block}
-  .banner{background:linear-gradient(135deg,#1a2733,#141a21);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin:14px 0}
+  .banner{background:linear-gradient(135deg,#ddf4ff,#dafbe1);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin:14px 0}
   .banner b{color:var(--accent2)}
   .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:8px 0}
   table{width:100%;border-collapse:collapse;font-size:12.4px}
   th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--border);vertical-align:top}
-  th{color:var(--muted);font-weight:600;font-size:10.5px;text-transform:uppercase;letter-spacing:.3px;position:sticky;top:0;background:#11161d;z-index:2}
+  th{color:var(--muted);font-weight:600;font-size:10.5px;text-transform:uppercase;letter-spacing:.3px;position:sticky;top:0;background:#eef1f4;z-index:2}
   tr:last-child td{border-bottom:none}
-  tbody tr:hover{background:#12171e}
+  tbody tr:hover{background:#f0f3f6}
   .tbl-wrap{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:auto;max-height:none}
   td.bu{color:var(--muted);font-size:10.5px;white-space:nowrap}
   td.job{font-weight:700;white-space:nowrap}
   td.loc{color:var(--muted);font-size:10.5px;white-space:nowrap}
   .chip{display:inline-block;padding:1px 7px;border-radius:999px;font-size:10.5px;font-weight:700;white-space:nowrap}
-  .hi{color:var(--accent2);background:#0f2417;border:1px solid #23502f}
-  .mid{color:var(--warn);background:#241d08;border:1px solid #5a4612}
-  .lo{color:var(--danger);background:#240f0e;border:1px solid #5a2420}
+  .hi{color:#1a7f37;background:#dafbe1;border:1px solid #aceebb}
+  .mid{color:#9a6700;background:#fff8c5;border:1px solid #eac54f}
+  .lo{color:#cf222e;background:#ffebe9;border:1px solid #ffcecb}
   /* 합격확률 band separators */
-  tr.band td{background:#0e1a12;color:var(--accent2);font-weight:800;font-size:11.5px;letter-spacing:.4px;text-transform:uppercase;border-top:2px solid #23502f}
-  tr.band.b-mid td{background:#1a1608;color:var(--warn);border-top:2px solid #5a4612}
-  tr.band.b-lo td{background:#1a0e0d;color:var(--danger);border-top:2px solid #5a2420}
+  tr.band td{background:#dafbe1;color:#1a7f37;font-weight:800;font-size:11.5px;letter-spacing:.4px;text-transform:uppercase;border-top:2px solid #aceebb}
+  tr.band.b-mid td{background:#fff8c5;color:#9a6700;border-top:2px solid #eac54f}
+  tr.band.b-lo td{background:#ffebe9;color:#cf222e;border-top:2px solid #ffcecb}
   .grid{display:grid;gap:14px}
   .g3{grid-template-columns:repeat(3,1fr)}
   @media(max-width:900px){.g3{grid-template-columns:1fr}}
@@ -55,9 +55,9 @@
   ul.clean{list-style:none;display:flex;flex-direction:column;gap:5px;margin-top:4px}
   ul.clean li{padding-left:15px;position:relative;font-size:12.5px}
   ul.clean li::before{content:"▹";position:absolute;left:0;color:var(--accent)}
-  .disclaimer{font-size:12px;color:var(--muted);background:#241d08;border:1px solid #5a4612;border-radius:10px;padding:11px 14px;margin-top:12px}
+  .disclaimer{font-size:12px;color:var(--muted);background:#fff8c5;border:1px solid #eac54f;border-radius:10px;padding:11px 14px;margin-top:12px}
   footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;text-align:center}
-  #lock{position:fixed;inset:0;z-index:999;background:radial-gradient(900px 600px at 50% 30%,#15202b,#0d1117);display:flex;align-items:center;justify-content:center;padding:24px}
+  #lock{position:fixed;inset:0;z-index:999;background:radial-gradient(900px 600px at 50% 30%,#eaf2fb,#f6f8fa);display:flex;align-items:center;justify-content:center;padding:24px}
   .lockbox{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:34px 30px;width:100%;max-width:340px;text-align:center}
   .lk-logo{width:54px;height:54px;border-radius:14px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:24px;color:#fff;margin:0 auto 14px}
   #pin{width:100%;text-align:center;font-size:28px;letter-spacing:14px;padding:12px 0;border-radius:12px;border:1px solid var(--border);background:var(--bg);color:var(--text);outline:none;font-weight:700;margin-top:14px}
