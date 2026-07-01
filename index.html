@@ -57,6 +57,21 @@
   ul.clean li::before{content:"▹";position:absolute;left:0;color:var(--accent)}
   .disclaimer{font-size:12px;color:var(--muted);background:#fff8c5;border:1px solid #eac54f;border-radius:10px;padding:11px 14px;margin-top:12px}
   footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;text-align:center}
+  .tabs{display:flex;gap:8px;margin:18px 0 4px;flex-wrap:wrap}
+  .tab{background:var(--panel);border:1px solid var(--border);color:var(--muted);padding:9px 16px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;text-decoration:none}
+  .tab:hover{color:var(--text);border-color:var(--accent)}
+  .tab.active{background:var(--grad);color:#fff;border-color:transparent}
+  .view{display:none}
+  .view.active{display:block}
+  .doc{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px 24px;margin-top:16px;font-size:14px;line-height:1.75}
+  .doc h3{font-size:16px;margin:0 0 4px}
+  .doc .meta{color:var(--muted);font-size:12.5px;margin-bottom:14px}
+  .doc h4{font-size:14px;color:var(--accent2);margin:16px 0 4px}
+  .doc p{margin:0 0 10px}
+  .doc ul{margin:4px 0 10px 18px}
+  .doc li{margin-bottom:4px}
+  .doc .ph{color:var(--danger);font-weight:700}
+  .doc .jd{color:var(--accent);font-weight:700;font-size:12.5px}
   #lock{position:fixed;inset:0;z-index:999;background:radial-gradient(900px 600px at 50% 30%,#eaf2fb,#f6f8fa);display:flex;align-items:center;justify-content:center;padding:24px}
   .lockbox{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:34px 30px;width:100%;max-width:340px;text-align:center}
   .lk-logo{width:54px;height:54px;border-radius:14px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:24px;color:#fff;margin:0 auto 14px}
@@ -82,6 +97,12 @@
     <div class="updated">기준일 2026-07-01 · 공고 [6월] 월간 hy-way(경력) · 서류마감 07/06 17:00</div>
   </header>
 
+  <div class="tabs">
+    <button class="tab active" data-v="analysis">① 모집분야 J/D 분석</button>
+    <button class="tab" data-v="docs">② 자소서 · 경력기술서</button>
+  </div>
+
+  <section id="analysis" class="view active">
   <div class="banner">
     <b>정렬 기준</b> — 이력·기존 대화와 무관한 <b>객관적 합격확률</b> = (채용 TO) × (요건 희소성) ÷ (지원자 쏠림).
     전국 반도체/디스플레이 공정·소자·설계 인력이 대규모로 몰린다는 전제에서,
@@ -173,82 +194,127 @@
     ※ 근무강도·선호도·경쟁률·합격확률은 <b>공개 J/D + 시장 통념 기반 정성 추정</b>이다. 실제 TO·지원자 수는 비공개이며 회차별로 달라질 수 있다.
   </div>
 
-  <!-- ============ 이력 교차 분석 (구체화) ============ -->
+  <!-- ============ 이력 교차 분석 (직접 경험 반영) ============ -->
   <h2 class="sec">🔎 내 이력 교차 — Photo공정(Wafer Bonding) 정합도 심층 분석</h2>
   <div class="banner">
-    ⚠ 여기부터는 <b>위 객관적 표와 달리 지원자 이력을 반영</b>한다. 결론: 합격확률 최상위 블루오션(건설 Infra·SHE)은 <b>전공·자격 벽으로 지원 불가</b> → <b>지원 가능한 것 중 이력이 가장 정밀하게 맞는 곳은 Photo공정(Wafer Bonding)</b>.
-    <div style="margin-top:8px;color:var(--muted);font-size:12px">이력 요약 — 화학 석사(성균관대) · Micro/Nano LED 공정개발 · 이종소재 접합(ACF/COF/SAC/Carbon-Black bump) · 계면 상태·접촉저항·trap/detrap·relaxation 분석 · 전기·광학 특성 및 신뢰성/불량 메커니즘 규명 · bending/buckling·warpage·stress FEM 해석 · Python/R 데이터분석·자동화</div>
+    ⚠ 여기부터는 <b>위 객관적 표와 달리 지원자 이력을 반영</b>한다. <b>핵심: 지원자는 Wafer 레벨 접합 공정을 이미 직접 개발·분석·개선한 경험자</b> → Photo공정(Wafer Bonding)은 “전이”가 아니라 <b>직접 정합</b>이며, 이 회차 최우선 지원처다.
+    <div style="margin-top:8px;color:var(--muted);font-size:12px">이력 요약 — 화학 석사(성균관대) · <b style="color:var(--text)">Wafer 기반 LEDoS 개발</b> · <b style="color:var(--text)">W2W / D2W / Cu-Cu Hybrid Bonding</b> · TSV · CMP · Backgrinding · Temporary Carrier Bonding · Alignment/Overlay · Flip Chip Bonding · Annealing · Void 결함 분석 · Python/R 데이터분석·자동화</div>
   </div>
 
   <div class="card" style="margin-bottom:14px">
-    <h4 style="color:var(--danger)">왜 순수 블루오션은 못 가나 (요약)</h4>
-    <div class="tbl-wrap" style="margin-top:8px"><table>
-      <thead><tr><th>블루오션</th><th>필수 관문</th><th>내 이력</th><th>판정</th></tr></thead>
-      <tbody>
-        <tr><td class="job">Utility 수처리</td><td>환경/토목 · 7년+ · 수질환경기사</td><td>수처리·건설 경력 전무</td><td><span class="chip lo">지원 불가</span></td></tr>
-        <tr><td class="job">시공(건축/설비/전기…)</td><td>건축·기계·전기·화공 + 건설 경력·기사</td><td>건설 시공 경력 없음</td><td><span class="chip lo">지원 불가</span></td></tr>
-        <tr><td class="job">안전관리 · SHE(안전/보건)</td><td>안전공학/산업보건 + 기사 자격증</td><td>안전·보건 전공/자격 없음</td><td><span class="chip lo">지원 불가</span></td></tr>
-      </tbody>
-    </table></div>
+    <h4 style="color:var(--danger)">참고 — 합격확률 최상위 블루오션(건설 Infra·SHE)은 지원 불가</h4>
+    Utility 수처리(환경/토목 7년+), 시공(건설 경력·기사), 안전·보건(기사 자격증)은 전공·자격 벽으로 실질 지원 불가. 그래서 <b>지원 가능한 것 중 이력이 가장 강하게 맞는 Photo공정(Wafer Bonding)</b>에 집중한다.
   </div>
 
-  <h2 class="sec" style="font-size:15px;margin-top:20px">① JD 요구 ↔ 내 경험 정밀 매핑</h2>
+  <h2 class="sec" style="font-size:15px;margin-top:20px">① JD 요구 ↔ 내 직접 경험 매핑</h2>
   <div class="tbl-wrap"><table>
-    <thead><tr><th>Wafer Bonding JD 요구</th><th>내 직접 경험 (구체)</th><th>전이 논리 (왜 통하나)</th><th>정합도</th></tr></thead>
+    <thead><tr><th>Wafer Bonding JD 요구</th><th>내 직접 경험</th><th>정합도</th></tr></thead>
     <tbody>
-      <tr><td class="job">Bonding Mechanical Stress 해석 · Film/Pattern Density 기인 Warpage 극복</td><td>Micro/Nano LED·PI/glass 이종적층에서 bending/buckling·warpage·stress FEM 해석, 기계적 취약영역 예측·설계 개선</td><td>wafer bonding warpage는 CTE mismatch·잔류응력·film stress가 원인 → 이종적층 stress 해석과 <b>동일 물리 프레임</b></td><td><span class="chip hi">높음</span></td></tr>
-      <tr><td class="job">Hybrid/Fusion Bonding 계면 품질 · Post-Bonding Overlay</td><td>ACF/COF/SAC/Carbon-Black bump 이종소재 접합의 계면 상태·접촉저항·정렬·계면 신뢰성 분석</td><td>접합 계면 결합품질·정렬(overlay)·계면저항 해석이 hybrid bonding 계면/overlay 품질 문제로 직접 전이</td><td><span class="chip hi">중상</span></td></tr>
-      <tr><td class="job">복잡한 기술 난제 자기주도 분석 · 구조적 해결</td><td>Carbon-Black bump 장시간 구동 휘도상승·off 후 회복·암점→약점→회복 현상의 가설(계면·trap/detrap·relaxation) 수립→검증 설계</td><td>불량 메커니즘 규명 방법론 자체가 bonding-induced defect 원인분석에 그대로 적용</td><td><span class="chip hi">높음</span></td></tr>
-      <tr><td class="job">공정 Data 기반 분석 · 제어 전략(Metrology &amp; Feedback)</td><td>Python/R 기반 특성 데이터 분석·비교·자동화, 데이터 기반 인과 규명 및 보고 효율화</td><td>inline metrology→feedback 제어 루프 구축에 데이터 분석·자동화 역량 직결</td><td><span class="chip hi">중상</span></td></tr>
-      <tr><td class="job">차세대 NAND/DRAM 소자 구조 · 단위공정 Integration 이해</td><td>메모리 소자·공정 직접 경험 없음(디스플레이 도메인)</td><td>공정 통합적 사고는 있으나 메모리 특화 지식은 학습 필요</td><td><span class="chip lo">갭</span></td></tr>
-      <tr><td class="job">Bonder 장비 개발·관리·Application 경력</td><td>Bonder 장비 직접 실무 경험 없음</td><td>공정·Application 관점 접근은 가능하나 장비 실무는 온보딩 필요</td><td><span class="chip lo">갭</span></td></tr>
+      <tr><td class="job">NAND/DRAM Hybrid Bonding · Fusion Bonding 공정 개발</td><td>LEDoS 구현을 위한 <b>W2W/D2W Bonding, Cu-Cu Hybrid Bonding</b> 공정 직접 개발·최적화</td><td><span class="chip hi">매우 높음</span></td></tr>
+      <tr><td class="job">Pattern Density·Film 기인 Warpage 극복 · Bonding Mechanical Stress 해석</td><td>Backgrinding·Bonding 후 <b>Warpage·잔류응력</b> 분석, Annealing 조건 최적화로 응력 완화</td><td><span class="chip hi">높음</span></td></tr>
+      <tr><td class="job">Post-Bonding Overlay 개선 (Bonder & Post Litho Control)</td><td><b>Bonding-induced Overlay</b> 틀어짐·<b>Alignment/Overlay 정렬</b> 개선 경험</td><td><span class="chip hi">높음</span></td></tr>
+      <tr><td class="job">Bonding Mechanism 이해 · Bonder 장비 Application</td><td>Hybrid Bonding <b>계면 결합·Cu 확산·Void 결함</b> 메커니즘 분석, CMP 평탄화 연계 공정 실무</td><td><span class="chip hi">높음</span></td></tr>
+      <tr><td class="job">공정 Data 기반 분석 · 제어 전략(Metrology &amp; Feedback)</td><td>Python/R 기반 계측·특성 데이터 분석·자동화, 불량 인과 규명</td><td><span class="chip hi">중상</span></td></tr>
+      <tr><td class="job">차세대 NAND/DRAM 소자 구조 · 단위공정 Integration 이해</td><td>웨이퍼 접합 자체는 직접 경험, 단 <b>메모리(NAND/DRAM) 소자 도메인</b>은 학습 필요</td><td><span class="chip mid">중 (유일한 갭)</span></td></tr>
     </tbody>
   </table></div>
 
   <h2 class="sec" style="font-size:15px;margin-top:20px">② 강점 · 갭 · 보완 전략</h2>
   <div class="grid g3">
-    <div class="card rank1"><h4 style="color:var(--accent2)">강점 (그대로 통함)</h4>
+    <div class="card rank1"><h4 style="color:var(--accent2)">강점 (직접 경험)</h4>
       <ul class="clean">
-        <li>이종소재 <b>접합·계면·접촉저항</b> 분석</li>
-        <li><b>warpage/stress FEM</b> 해석 → bonding stress</li>
-        <li><b>불량 메커니즘 규명</b> 방법론</li>
+        <li><b>W2W/D2W/Hybrid(Cu-Cu) Bonding</b> 공정 개발</li>
+        <li><b>TSV · CMP · Backgrinding · Temporary Carrier</b> 연계</li>
+        <li><b>Overlay 정렬 · Warpage/Stress · Void</b> 분석·개선</li>
         <li>Python/R <b>데이터 분석·자동화</b></li>
-        <li>Wafer Bonding 경험자 희소 → <b>경쟁 분리</b></li>
+        <li>Wafer Bonding 경험자 희소 → <b>경쟁 분리 + 직접 정합</b></li>
       </ul></div>
-    <div class="card rank3"><h4 style="color:var(--warn)">갭 (2가지)</h4>
+    <div class="card rank3"><h4 style="color:var(--warn)">갭 (1가지로 축소)</h4>
       <ul class="clean">
-        <li>NAND/DRAM <b>메모리 소자·공정</b> 도메인</li>
-        <li><b>Bonder 장비</b> 실무</li>
-        <li>디스플레이↔반도체 <b>용어·스펙</b> 차이</li>
+        <li>NAND/DRAM <b>메모리 소자·공정</b> 도메인 지식</li>
+        <li>(웨이퍼 접합 공정 자체는 이미 직접 경험)</li>
       </ul></div>
     <div class="card rank2"><h4 style="color:var(--accent)">갭 보완 전략</h4>
       <ul class="clean">
-        <li>“디스플레이 접합 물리 = wafer bonding 물리” <b>전이 가능성 구조적 설명</b></li>
-        <li>메모리 3D 적층·hybrid/W2W bonding 트렌드 <b>선학습</b>으로 도메인 갭 상쇄</li>
-        <li>장비는 <b>공정·Application 관점</b>으로 접근</li>
+        <li>LEDoS(Si 웨이퍼) 접합 = 메모리 3D 적층 접합과 <b>동일 공정 언어</b>임을 강조</li>
+        <li>3D NAND·VG/3D DRAM 구조 및 W2W bonding 트렌드 <b>선학습</b></li>
+        <li>메모리 소자 스펙만 온보딩하면 <b>즉시 기여</b> 가능함을 어필</li>
       </ul></div>
   </div>
 
-  <h2 class="sec" style="font-size:15px;margin-top:20px">③ 지원 가능 후보 비교 (Wafer Bonding 우선)</h2>
-  <div class="tbl-wrap"><table>
-    <thead><tr><th>직무</th><th>내 이력이 맞는 점</th><th>부족·리스크</th><th>경쟁 분리도</th><th>현실 추천도</th></tr></thead>
-    <tbody>
-      <tr><td class="job">Photo공정 (Wafer Bonding)</td><td>이종소재 접합·bump + warpage/stress FEM + 계면/신뢰성 → JD와 1:1 일치</td><td>메모리 bonding 직접경험·Bonder 장비 gap, 근무강도 높음</td><td><span class="chip hi">높음</span></td><td><span class="chip hi">★ 최우선</span></td></tr>
-      <tr><td class="job">소자 - TCAD</td><td>warpage/stress FEM 해석 + Python + 열해석 관심</td><td>DFT/MD/KMC 미보유(핵심 2개+ 중 FEM만 근접)</td><td><span class="chip mid">중</span></td><td><span class="chip mid">중</span></td></tr>
-      <tr><td class="job">소재기술 - Patterning 소재</td><td>화학 석사·소재/계면/신뢰성·데이터</td><td>PR·PAG·EUV Resist 직접경험 無</td><td><span class="chip mid">중</span></td><td><span class="chip mid">중하</span></td></tr>
-      <tr><td class="job">Process Integration</td><td>불량 메커니즘·계면·데이터 원인규명</td><td>메모리 Peri/Cell 경험無·근무강도↑·공정 인파 쏠림</td><td><span class="chip lo">낮음</span></td><td><span class="chip mid">중</span></td></tr>
-      <tr><td class="job">제조혁신 / Digital Factory</td><td>AI 자동화 관심·Python/R·리딩</td><td>DX 5년급 실적·LLM Agent 프로덕션 증빙 필요</td><td><span class="chip lo">낮음</span></td><td><span class="chip mid">중하</span></td></tr>
-    </tbody>
-  </table></div>
-
   <div class="banner" style="margin-top:14px">
     <b style="color:var(--accent2)">최종 포지셔닝 한 문장</b><br>
-    <span style="color:var(--text)">“이종소재 접합 구조의 계면 품질·warpage/stress·신뢰성을 물리·데이터 기반으로 규명해 온 경험을, NAND/DRAM Wafer Bonding의 Overlay·Mechanical Stress·Bonding-induced 불량 문제 해결에 이식하는 공정개발 엔지니어.”</span><br>
-    <span style="color:var(--muted);font-size:12px">차선: 소자-TCAD — warpage/stress FEM + Python 강점을 살리되 DFT/MD/KMC 학습 보완 필요.</span>
+    <span style="color:var(--text)">“Wafer 기반 LEDoS 개발에서 W2W/D2W·Cu-Cu Hybrid Bonding·TSV·CMP·Overlay·Void를 직접 개발·분석·개선해 온 웨이퍼 본딩 공정 엔지니어로서, 이 역량을 3D NAND/DRAM Wafer Bonding의 Overlay·Mechanical Stress·Void 불량 해결에 즉시 적용하겠습니다.”</span>
   </div>
+  </section>
 
-  <footer>hy 경력채용 모집분야 통합 분석표 + 이력 교차(Wafer Bonding) · 첨부 J/D 4종 전수 반영 · 회사명 마스킹(hy) · 정성 추정(비공식) · 2026-07-01</footer>
+  <!-- ============ 자소서 · 경력기술서 탭 ============ -->
+  <section id="docs" class="view">
+    <div class="banner">📝 Photo공정(Wafer Bonding) 지원 서류 초안 · <b>퇴사동기 제외</b>(현재 재직 중) · <span style="color:var(--danger);font-weight:700">[ ]</span> 는 실제 수치를 넣어야 하는 자리 — 허위기재 방지를 위해 비워둠</div>
+
+    <div class="doc">
+      <h3>1. 자기소개서 — 지원동기 및 향후 계획</h3>
+      <div class="meta">문항 예시: SK하이닉스 지원동기 및 입사 후 향후 계획 · 약 900~1,100자 · 퇴사동기 문항이 별도로 있으면 “현재 재직 중이며 이직 사유는 …” 대신 아래 지원동기로 대체</div>
+
+      <h4>■ Wafer Bonding을 직접 다뤄 온 공정 엔지니어</h4>
+      <p>저는 Wafer 기반 LEDoS(LED on Silicon) 개발 과정에서 Wafer-to-Wafer(W2W) 및 Die-to-Wafer(D2W) Bonding, Cu-Cu Hybrid Bonding, TSV 형성, CMP 평탄화, Alignment/Overlay 정렬, Backgrinding, Temporary Carrier Bonding 등 웨이퍼 레벨 접합 공정 전반을 직접 개발·분석·개선해 왔습니다. 특히 Hybrid Bonding 계면의 Cu 확산·결합 품질, 접합부 Void 결함, Bonding-induced Overlay 틀어짐, Annealing 조건에 따른 계면 특성 변화를 공정·물성·데이터 관점에서 규명하고 개선한 경험이 있습니다.</p>
+
+      <h4>■ 지원 동기 — 이미 하던 일을, 메모리 최전선에서</h4>
+      <p>SK하이닉스 Photo공정(Wafer Bonding) 직무는 제가 LEDoS 개발에서 직접 수행해 온 W2W/D2W Bonding, Cu-Cu Hybrid Bonding, TSV, CMP, Overlay 제어 역량을 그대로 3D NAND/DRAM 구조 구현에 적용할 수 있는 자리입니다. Pattern Density·Film stress가 유발하는 Warpage, Bonding Mechanical Stress, Post-Bonding Overlay 한계, 접합 Void 불량은 제가 이미 현업에서 다뤄 온 문제들이며, 2D의 한계를 넘어 3D 메모리로 가는 전환의 핵심에 이 기술이 있다는 점에서 제 경험이 가장 크게 기여할 수 있는 분야라고 판단했습니다.</p>
+
+      <h4>■ 입사 후 향후 계획</h4>
+      <p>입사 후에는 NAND/DRAM 소자 구조와 단위 공정 Integration을 빠르게 익혀, 기존 웨이퍼 본딩 공정·계면 분석 경험을 메모리 제품의 Bonding Overlay 개선, Mechanical Stress 저감, Void·계면 불량 규명, Metrology–Feedback 기반 공정 제어에 접목하겠습니다. 나아가 Hybrid Bonding·TSV 기반 차세대 3D 적층 구조의 공정 window와 신뢰성을 함께 끌어올리는 핵심 엔지니어로 성장하겠습니다.</p>
+    </div>
+
+    <div class="doc">
+      <h3>2. 경력기술서</h3>
+      <div class="meta"><span class="ph">[ ]</span> 안의 정량 성과(수율 / Void율 / Overlay 산포 / 기간 / 건수)를 실제 수치로 채우면 설득력이 급상승</div>
+
+      <h4>■ 경력 요약</h4>
+      <p>Wafer 기반 LEDoS 개발 조직에서 <span class="ph">[○년간]</span> 웨이퍼 레벨 접합 공정(W2W/D2W/Cu-Cu Hybrid Bonding), TSV·CMP·Backgrinding, Alignment/Overlay 정렬, 접합 신뢰성·Void 결함 분석을 직접 수행. 웨이퍼 접합 계면 품질·정렬 정밀도·기계적 안정성·장기 신뢰성을 통합적으로 개선.</p>
+
+      <h4>■ 프로젝트 1 — W2W / D2W & Cu-Cu Hybrid Bonding 공정 개발</h4>
+      <ul>
+        <li>LEDoS 구현을 위한 W2W/D2W Bonding 및 Cu-Cu Hybrid Bonding 공정 조건 개발·최적화</li>
+        <li>Temporary Carrier Bonding, Backgrinding(웨이퍼 박막화), CMP 평탄화 연계 공정 확립</li>
+        <li>Bonding 계면 결합 품질·Cu 확산·접합 강도 분석 → 접합 조건 최적화</li>
+        <li>성과: <span class="ph">[접합 수율 ○○% / Void율 ○○% 저감]</span></li>
+        <li><span class="jd">▷ JD 연계: NAND/DRAM Hybrid·Fusion Bonding 공정 개발</span></li>
+      </ul>
+
+      <h4>■ 프로젝트 2 — Bonding Overlay · Warpage · Mechanical Stress 제어</h4>
+      <ul>
+        <li>Bonding-induced Overlay 틀어짐과 Pattern Density·Film stress 기인 Warpage 분석 → Alignment/Overlay 정렬 개선</li>
+        <li>접합 구조 Mechanical Stress·잔류응력 해석 및 Annealing 조건 최적화로 응력 완화</li>
+        <li>성과: <span class="ph">[Overlay 산포 ○○ 개선 / warpage ○○㎛ 저감]</span></li>
+        <li><span class="jd">▷ JD 연계: Pattern Density·Film 기인 Warpage 극복, Mechanical Stress 해석·Overlay 한계 극복, Post-Bonding Overlay 개선</span></li>
+      </ul>
+
+      <h4>■ 프로젝트 3 — 접합 신뢰성 · Void 결함 분석 및 데이터 기반 공정 제어</h4>
+      <ul>
+        <li>접합부 Void·계면 불량의 원인(계면 상태·오염·표면 활성화·Annealing) 규명 및 개선</li>
+        <li>장기 신뢰성 평가에서의 계면 특성 변화 메커니즘 분석</li>
+        <li>Python/R 기반 계측·특성 데이터 분석·자동화로 인과 규명 및 공정 feedback 효율화</li>
+        <li>성과: <span class="ph">[불량 원인 규명 ○건 / 분석 TAT ○○% 단축]</span></li>
+        <li><span class="jd">▷ JD 연계: 공정 Data 기반 분석·제어 전략(Metrology & Feedback), 난제 자기주도 구조적 해결</span></li>
+      </ul>
+
+      <h4>■ 맺음</h4>
+      <p>W2W/D2W·Cu-Cu Hybrid Bonding·TSV·CMP·Overlay·Void 분석에 이르는 웨이퍼 접합 전주기 경험을 바탕으로, SK하이닉스 Wafer Bonding 공정의 Overlay·Mechanical Stress·Void·Bonding-induced 불량 문제 해결과 3D NAND/DRAM 양산 경쟁력에 즉시 기여하겠습니다.</p>
+    </div>
+  </section>
+
+  <footer>hy 경력채용 J/D 통합 분석 + 이력 교차 + 지원서 초안(Wafer Bonding) · 첨부 J/D 4종 전수 반영 · 회사명 마스킹(hy) · 정성 추정(비공식) · 2026-07-01</footer>
 </div>
 
+<script>
+  document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById(t.dataset.v).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }));
+</script>
 </body>
 </html>
