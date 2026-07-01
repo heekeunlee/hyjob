@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>hy 경력채용 · 모집분야 전체 J/D 통합 분석표</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c232d; --border:#2a323c;
+    --text:#e6edf3; --muted:#9aa7b4; --accent:#58a6ff; --accent2:#3fb950;
+    --warn:#d29922; --danger:#f85149; --chip:#21262d;
+    --grad:linear-gradient(135deg,#1f6feb 0%,#3fb950 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",Roboto,"Malgun Gothic",sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.55}
+  .wrap{max-width:1400px;margin:0 auto;padding:24px 20px 90px}
+  header.top{display:flex;flex-direction:column;gap:8px;padding:24px 0 16px;border-bottom:1px solid var(--border)}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:42px;height:42px;border-radius:12px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#fff}
+  h1{font-size:21px;font-weight:700;letter-spacing:-.3px}
+  .sub{color:var(--muted);font-size:13px}
+  .updated{color:var(--muted);font-size:12px}
+  a.back{display:inline-block;margin-top:10px;color:var(--accent);font-size:13px;text-decoration:none}
+  h2.sec{font-size:18px;margin:28px 0 8px;font-weight:700;display:flex;align-items:center;gap:8px}
+  h2.sec::before{content:"";width:4px;height:18px;background:var(--grad);border-radius:3px;display:inline-block}
+  .banner{background:linear-gradient(135deg,#1a2733,#141a21);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin:14px 0}
+  .banner b{color:var(--accent2)}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:8px 0}
+  table{width:100%;border-collapse:collapse;font-size:12.4px}
+  th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:10.5px;text-transform:uppercase;letter-spacing:.3px;position:sticky;top:0;background:#11161d;z-index:2}
+  tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:#12171e}
+  .tbl-wrap{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:auto;max-height:none}
+  td.bu{color:var(--muted);font-size:10.5px;white-space:nowrap}
+  td.job{font-weight:700;white-space:nowrap}
+  td.loc{color:var(--muted);font-size:10.5px;white-space:nowrap}
+  .chip{display:inline-block;padding:1px 7px;border-radius:999px;font-size:10.5px;font-weight:700;white-space:nowrap}
+  .hi{color:var(--accent2);background:#0f2417;border:1px solid #23502f}
+  .mid{color:var(--warn);background:#241d08;border:1px solid #5a4612}
+  .lo{color:var(--danger);background:#240f0e;border:1px solid #5a2420}
+  /* 합격확률 band separators */
+  tr.band td{background:#0e1a12;color:var(--accent2);font-weight:800;font-size:11.5px;letter-spacing:.4px;text-transform:uppercase;border-top:2px solid #23502f}
+  tr.band.b-mid td{background:#1a1608;color:var(--warn);border-top:2px solid #5a4612}
+  tr.band.b-lo td{background:#1a0e0d;color:var(--danger);border-top:2px solid #5a2420}
+  .grid{display:grid;gap:14px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:900px){.g3{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px}
+  .card h4{font-size:14px;margin-bottom:6px}
+  .card.rank1{border-top:3px solid var(--accent2)}
+  .card.rank2{border-top:3px solid var(--accent)}
+  .card.rank3{border-top:3px solid var(--warn)}
+  ul.clean{list-style:none;display:flex;flex-direction:column;gap:5px;margin-top:4px}
+  ul.clean li{padding-left:15px;position:relative;font-size:12.5px}
+  ul.clean li::before{content:"▹";position:absolute;left:0;color:var(--accent)}
+  .disclaimer{font-size:12px;color:var(--muted);background:#241d08;border:1px solid #5a4612;border-radius:10px;padding:11px 14px;margin-top:12px}
+  footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;text-align:center}
+  #lock{position:fixed;inset:0;z-index:999;background:radial-gradient(900px 600px at 50% 30%,#15202b,#0d1117);display:flex;align-items:center;justify-content:center;padding:24px}
+  .lockbox{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:34px 30px;width:100%;max-width:340px;text-align:center}
+  .lk-logo{width:54px;height:54px;border-radius:14px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:24px;color:#fff;margin:0 auto 14px}
+  #pin{width:100%;text-align:center;font-size:28px;letter-spacing:14px;padding:12px 0;border-radius:12px;border:1px solid var(--border);background:var(--bg);color:var(--text);outline:none;font-weight:700;margin-top:14px}
+  #pin:focus{border-color:var(--accent)}
+  #unlock{margin-top:16px;width:100%;padding:12px;border:none;border-radius:12px;background:var(--grad);color:#fff;font-weight:700;font-size:15px;cursor:pointer}
+  #lkmsg{color:var(--danger);font-size:12.5px;min-height:16px;margin-top:10px}
+  .gate-hidden{display:none !important}
+  body.locked{overflow:hidden}
+</style>
+</head>
+<body class="locked">
+
+<div id="lock"><div class="lockbox">
+  <div class="lk-logo">hy</div>
+  <h1 style="font-size:17px">잠금 화면</h1>
+  <p style="color:var(--muted);font-size:12.5px;margin-top:4px">4자리 PIN을 입력하세요</p>
+  <input id="pin" type="password" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="••••" />
+  <button id="unlock">열기</button>
+  <div id="lkmsg"></div>
+</div></div>
+
+<div class="wrap gate-hidden">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">hy</div>
+      <div>
+        <h1>hy 경력채용 · 모집분야 전체 J/D 통합 분석표</h1>
+        <div class="sub">첨부 J/D 4종(Tech R&amp;D·제조·Infra·Staff) 전수 분석 · 하나의 표로 통합 · <b>합격확률 높은 순 정렬</b> · 회사명 <b>hy</b> 마스킹</div>
+      </div>
+    </div>
+    <div class="updated">기준일 2026-07-01 · 공고 [6월] 월간 hy-way(경력) · 서류마감 07/06 17:00</div>
+  </header>
+
+  <div class="banner">
+    <b>정렬 기준</b> — 이력·기존 대화와 무관한 <b>객관적 합격확률</b> = (채용 TO) × (요건 희소성) ÷ (지원자 쏠림).
+    전국 반도체/디스플레이 공정·소자·설계 인력이 대규모로 몰린다는 전제에서,
+    <b>그 대군이 지원조차 못 하는 분야일수록 실질 경쟁이 약하다</b>. 아래 한 표에 <b>합격확률 높은 순</b>으로 전부 정렬했다.
+  </div>
+
+  <div class="legend">
+    <span><b>근무강도</b> <span class="chip hi">낮</span><span class="chip mid">중</span><span class="chip lo">높</span></span>
+    <span><b>선호(쏠림)</b> <span class="chip hi">낮·유리</span><span class="chip mid">중</span><span class="chip lo">높·불리</span></span>
+    <span><b>경쟁률</b> <span class="chip hi">낮</span><span class="chip mid">중</span><span class="chip lo">높</span></span>
+    <span><b>합격확률</b> <span class="chip hi">높음</span><span class="chip mid">중</span><span class="chip lo">낮음</span></span>
+  </div>
+
+  <div class="tbl-wrap"><table>
+    <thead><tr>
+      <th>부문</th><th>직무</th><th>지역</th><th>하는 일 요약</th><th>필요 역량·경험</th>
+      <th>근무<br>강도</th><th>선호</th><th>경쟁<br>률</th><th>합격<br>확률</th>
+    </tr></thead>
+    <tbody>
+
+      <tr class="band"><td colspan="9">합격확률 — 높음 · 매우높음 (블루오션: 지원자 대군이 구조적으로 배제)</td></tr>
+      <tr><td class="bu">Infra</td><td class="job">Utility기술 (Gas/Chemical/수처리)</td><td class="loc">이천·청주·용인</td><td>Fab 용수/폐수/정수·Gas·Chemical 설비 설계·운영·시공</td><td>환경/토목/화공 <b>7년+</b>, 토목·수질환경기사</td><td><span class="chip mid">중</span></td><td><span class="chip hi">매우낮</span></td><td><span class="chip hi">매우낮</span></td><td><span class="chip hi">매우높음</span></td></tr>
+      <tr><td class="bu">Infra</td><td class="job">시공 (건축·설비·전기·배관·기계)</td><td class="loc">이천·청주·용인·해외</td><td>반도체 Fab 건설 각 공종 설계·시공관리·인허가</td><td>건축/기계/전기/화공 <b>+4년</b>, 관련 기사·기술사</td><td><span class="chip mid">중상</span></td><td><span class="chip hi">낮</span></td><td><span class="chip hi">낮</span></td><td><span class="chip hi">높음</span></td></tr>
+      <tr><td class="bu">Infra</td><td class="job">설계(설계관리) · 사업관리(플랜트)</td><td class="loc">이천·청주·용인</td><td>Fab 건설 계획설계·설계품질·Cost/Delivery·공정관리</td><td>건축/설비/전기 2~4년+, 플랜트 설계/시공/PM</td><td><span class="chip mid">중상</span></td><td><span class="chip hi">낮</span></td><td><span class="chip hi">낮</span></td><td><span class="chip hi">높음</span></td></tr>
+      <tr><td class="bu">Infra·SHE</td><td class="job">안전관리 · SHE 예방안전(이천·청주)</td><td class="loc">이천·청주·용인</td><td>안전작업허가·위험성평가·사고조사·안전관리체계 운영</td><td>안전공학/산업안전 2~4년+, <b>안전/화공/가스/전기 기사↑</b></td><td><span class="chip mid">중</span></td><td><span class="chip hi">낮</span></td><td><span class="chip hi">낮</span></td><td><span class="chip hi">높음</span></td></tr>
+      <tr><td class="bu">Infra·SHE</td><td class="job">SHE (보건)</td><td class="loc">청주</td><td>직업성 질병예방·산업위생·건강증진 관리</td><td>보건학/산업보건 5년+, 산업위생관리기사·인간공학기사</td><td><span class="chip hi">낮~중</span></td><td><span class="chip hi">낮</span></td><td><span class="chip hi">낮</span></td><td><span class="chip hi">높음</span></td></tr>
+
+      <tr class="band b-mid"><td colspan="9">합격확률 — 중상 (별도의 좁은 인력풀 · 비인기)</td></tr>
+      <tr><td class="bu">Infra·SHE</td><td class="job">SHE 정책연구 &amp; 상생협력</td><td class="loc">이천</td><td>SHE 규제 대응전략·정책 협의·공급망 SHE 거버넌스</td><td>안전관리 3년+, OPIC IH, 산안법, 국가자격증</td><td><span class="chip mid">중</span></td><td><span class="chip hi">낮</span></td><td><span class="chip hi">낮</span></td><td><span class="chip hi">중상</span></td></tr>
+      <tr><td class="bu">제조</td><td class="job">양산기술</td><td class="loc">청주</td><td>장비 TTTM·PM/BM 고도화·Wafer Loss 개선 → Fab 수율</td><td>반도체 2년+(Junior 가능), 장비 생산운영·품질</td><td><span class="chip mid">중상</span></td><td><span class="chip hi">낮~중</span></td><td><span class="chip mid">중</span></td><td><span class="chip hi">중상</span></td></tr>
+      <tr><td class="bu">제조 P&amp;T</td><td class="job">Application H/W 개발</td><td class="loc">이천</td><td>DRAM Test Infra(실장기/보드) HW 개발·양산 도입</td><td>3년+, x86 시스템·실장기, DDR5/CXL, BIOS/UEFI</td><td><span class="chip mid">중상</span></td><td><span class="chip mid">중</span></td><td><span class="chip mid">중</span></td><td><span class="chip hi">중상</span></td></tr>
+      <tr><td class="bu">제조 P&amp;T</td><td class="job">Application TEST</td><td class="loc">이천</td><td>Memory Module Test Program·시스템 BIOS 개발</td><td>3년+, C/C#/Assembly, Intel/AMD/ARM, Firmware</td><td><span class="chip mid">중상</span></td><td><span class="chip mid">중</span></td><td><span class="chip mid">중</span></td><td><span class="chip hi">중상</span></td></tr>
+      <tr><td class="bu">제조 품질</td><td class="job">품질보증</td><td class="loc">이천</td><td>eSSD 고객품질 대응·Line/Field 불량 관리·개선</td><td>품질/고객대응 4년+, Storage 이해, 외국어</td><td><span class="chip mid">중상</span></td><td><span class="chip mid">중</span></td><td><span class="chip mid">중</span></td><td><span class="chip hi">중상</span></td></tr>
+      <tr><td class="bu">IT</td><td class="job">보안기획/분석 (CERT · Red Team)</td><td class="loc">이천</td><td>침해대응(SOAR/SIEM)·모의침투(Red Team)</td><td>보안 3년+, Splunk/SIEM, (RedTeam)OSCP·BOB·K-Shield</td><td><span class="chip mid">중상</span></td><td><span class="chip mid">중</span></td><td><span class="chip hi">낮~중</span></td><td><span class="chip hi">중상</span></td></tr>
+      <tr><td class="bu">IT</td><td class="job">CAD Engineering</td><td class="loc">이천</td><td>Digital 설계 Flow·EDA 최적화 / Cell Characterize</td><td>Synthesis/STA/DFT 3개+ 또는 Cell Char 5년+, Liberty</td><td><span class="chip mid">중상</span></td><td><span class="chip mid">중</span></td><td><span class="chip mid">중</span></td><td><span class="chip hi">중상</span></td></tr>
+      <tr><td class="bu">제조</td><td class="job">AI/Data Engineering</td><td class="loc">이천</td><td>건설 Project AI 기반 계획·자동화 솔루션 기획·구현</td><td>건축/설비/전기/컴공, 딥러닝/ML/생성형 AI, 건설도메인</td><td><span class="chip mid">중</span></td><td><span class="chip mid">중상</span></td><td><span class="chip mid">중</span></td><td><span class="chip hi">중상</span></td></tr>
+      <tr><td class="bu">Staff</td><td class="job">물류 · 자재관리</td><td class="loc">이천</td><td>수출입·Fab 간 물류/자재 창고·재고·자동화 기획·운영</td><td>산업공학/물류 2~4년(Junior), 데이터분석, CAD</td><td><span class="chip mid">중</span></td><td><span class="chip hi">낮~중</span></td><td><span class="chip mid">중</span></td><td><span class="chip hi">중상</span></td></tr>
+      <tr><td class="bu">R&amp;D</td><td class="job">소자 - ESD</td><td class="loc">이천</td><td>ESD 보호소자·회로 설계·검증·불량분석(불량 Zero)</td><td>ESD 개발 3년+, On-chip ESD 회로, TCAD/Spice/PERC</td><td><span class="chip mid">중</span></td><td><span class="chip mid">중</span></td><td><span class="chip hi">낮~중</span></td><td><span class="chip hi">중상</span></td></tr>
+
+      <tr class="band b-mid"><td colspan="9">합격확률 — 중 (선호·경쟁 높으나 요건이 날카로워 유효경쟁자 제한적)</td></tr>
+      <tr><td class="bu">Tech R&amp;D</td><td class="job">HBM 회로설계·Digital Design(FE/BE/RTL/SoC/검증)·Foundry PI</td><td class="loc">이천</td><td>HBM 회로/디지털 구현(합성·STA·DFT·P&amp;R), PPAT 최적화</td><td>4~5년+, 5nm↓ PPAT, EDA(Innovus), Tcl/Python, HBM PHY</td><td><span class="chip lo">높</span></td><td><span class="chip lo">최상</span></td><td><span class="chip lo">매우높</span></td><td><span class="chip mid">중</span></td></tr>
+      <tr><td class="bu">Tech R&amp;D</td><td class="job">DRAM 회로·Interface·Analog·배치·설계검증·SI/PI</td><td class="loc">이천</td><td>DRAM 전 제품 회로/전원/인터페이스 설계·검증, SI/PI</td><td>2~4년+, Full custom, Hspice/Verilog, HFSS/Sigrity</td><td><span class="chip mid">중상</span></td><td><span class="chip lo">높</span></td><td><span class="chip lo">높</span></td><td><span class="chip mid">중</span></td></tr>
+      <tr><td class="bu">Tech R&amp;D</td><td class="job">NAND 설계 (Interface·Analog·Layout·Logic)</td><td class="loc">이천</td><td>NAND 고속 I/O·Analog·Layout·Command RTL 설계</td><td>2년+(박사 무관), HDL/RTL·SPICE·Layout tool</td><td><span class="chip mid">중상</span></td><td><span class="chip mid">중상</span></td><td><span class="chip mid">중~높</span></td><td><span class="chip mid">중</span></td></tr>
+      <tr><td class="bu">Tech R&amp;D</td><td class="job">Solution (SoC·검증·Digital IP·Analog IP·Interface HS·Logical Impl)</td><td class="loc">분당</td><td>NAND Solution/SSD Controller SoC 설계·검증·IP·구현</td><td>3~4년+, RTL/UVM·PHY·ASIC Tape-out, AMBA/NoC</td><td><span class="chip mid">중상</span></td><td><span class="chip lo">높</span></td><td><span class="chip lo">높</span></td><td><span class="chip mid">중</span></td></tr>
+      <tr><td class="bu">Tech R&amp;D</td><td class="job">선행 System Architecture</td><td class="loc">분당</td><td>메모리 중심 차세대 시스템 아키텍처(PIM/PNM, CXL) 연구</td><td>EECS 석사+박사/5년, UCIe·CXL, LLM HW-SW co-design</td><td><span class="chip mid">중상</span></td><td><span class="chip mid">중상</span></td><td><span class="chip mid">중</span></td><td><span class="chip mid">중</span></td></tr>
+      <tr><td class="bu">Tech R&amp;D</td><td class="job">Photo공정 (Wafer Bonding)</td><td class="loc">이천</td><td>3D NAND/DRAM Hybrid·Fusion Bonding 공정개발·Overlay</td><td>Wafer Bonding 공정·Bonder 장비, warpage/stress</td><td><span class="chip lo">높</span></td><td><span class="chip mid">중</span></td><td><span class="chip mid">중</span></td><td><span class="chip mid">중</span></td></tr>
+      <tr><td class="bu">Tech R&amp;D</td><td class="job">소자 - TCAD</td><td class="loc">이천</td><td>Material Simulation(DFT/MD/KMC)·Physics AI Virtual R&amp;D</td><td>DFT/MD/FEM 2개+2년, Python, (우대)PINN·NEGF·MLIP</td><td><span class="chip mid">중</span></td><td><span class="chip lo">높</span></td><td><span class="chip mid">중</span></td><td><span class="chip mid">중</span></td></tr>
+      <tr><td class="bu">제조</td><td class="job">Process Integration</td><td class="loc">청주</td><td>구조불량 개선·Process Window·Inline/WT/PKT 데이터 연계</td><td>메모리 Peri/Cell 3년+, 통계·Spotfire/Python, CD/OCD</td><td><span class="chip lo">높</span></td><td><span class="chip lo">높</span></td><td><span class="chip lo">높</span></td><td><span class="chip mid">중</span></td></tr>
+      <tr><td class="bu">제조</td><td class="job">Diffusion 공정</td><td class="loc">이천</td><td>이온주입/RTP/HKMG/MLA DRAM 핵심공정 고도화(제조 배치)</td><td>DRAM 양산/개발 5년+, 공정/장비 불량 원인분석</td><td><span class="chip lo">높</span></td><td><span class="chip mid">중</span></td><td><span class="chip lo">높</span></td><td><span class="chip mid">중</span></td></tr>
+      <tr><td class="bu">제조 기반</td><td class="job">소재기술 - Patterning 소재</td><td class="loc">이천</td><td>Litho용 Photo Resist·Interlayer 소재 개발(PAG/EUV)</td><td>화학/고분자/재료 5년+, PR·EUV Resist 합성·특성분석</td><td><span class="chip mid">중</span></td><td><span class="chip lo">높</span></td><td><span class="chip mid">중</span></td><td><span class="chip mid">중</span></td></tr>
+      <tr><td class="bu">제조</td><td class="job">제조혁신</td><td class="loc">이천</td><td>Smart Manufacturing 전략기획·Digital Twin/Physical AI 도입</td><td>전공무관, 제조 DX/AIX 프로젝트 5년+, 리딩</td><td><span class="chip mid">중상</span></td><td><span class="chip lo">높</span></td><td><span class="chip lo">높</span></td><td><span class="chip mid">중</span></td></tr>
+      <tr><td class="bu">IT</td><td class="job">구축/운영/최적화 (Digital Twin)</td><td class="loc">이천</td><td>제조 Digital Twin 플랫폼·AI Factory Simulation 구축</td><td>NVIDIA Omniverse, Spark/Iceberg, AI 예측, Ontology</td><td><span class="chip mid">중상</span></td><td><span class="chip lo">높</span></td><td><span class="chip mid">중~높</span></td><td><span class="chip mid">중</span></td></tr>
+      <tr><td class="bu">IT</td><td class="job">Data 분석/개발</td><td class="loc">분당</td><td>장비 데이터 AI/ML 모델 개발·서빙·백엔드 시스템</td><td>5년+, MLflow/Kubeflow/Airflow, 백엔드/클라우드</td><td><span class="chip mid">중상</span></td><td><span class="chip lo">높</span></td><td><span class="chip lo">높</span></td><td><span class="chip mid">중</span></td></tr>
+
+      <tr class="band b-lo"><td colspan="9">합격확률 — 낮~중 · 낮음 (전국 쏠림 극심 + 특수요건)</td></tr>
+      <tr><td class="bu">제조 데이터</td><td class="job">Data Science (Etch)</td><td class="loc">이천</td><td>Etch Big Data(FDC/Response) 분석·예측모델·AI Agent</td><td><b>데이터/AI 석사+</b>, AI/DS 5년+, Python/SQL, ML/DL 제조적용</td><td><span class="chip mid">중상</span></td><td><span class="chip lo">최상</span></td><td><span class="chip lo">매우높</span></td><td><span class="chip lo">낮~중</span></td></tr>
+      <tr><td class="bu">제조 데이터</td><td class="job">AI/DT (P&amp;T)</td><td class="loc">이천</td><td>P&amp;T 공정 LLM 기반 AI Agent 개발·RAG·현장 연동</td><td>AI개발 2년+, LangChain/LangGraph 필수, RAG/Vector DB</td><td><span class="chip mid">중상</span></td><td><span class="chip lo">최상</span></td><td><span class="chip lo">매우높</span></td><td><span class="chip lo">낮~중</span></td></tr>
+      <tr><td class="bu">제조 데이터</td><td class="job">Digital Factory</td><td class="loc">이천</td><td>Diffusion 조직 Agentic AI·Legacy 연계·제조현장 AIX</td><td>학사+3년, Python/SQL·LLM Agent, 제조도메인, LangGraph</td><td><span class="chip mid">중상</span></td><td><span class="chip lo">최상</span></td><td><span class="chip lo">매우높</span></td><td><span class="chip lo">낮~중</span></td></tr>
+      <tr><td class="bu">Staff</td><td class="job">사업개발</td><td class="loc">서울</td><td>M&amp;A·지분투자·CVC·투자 포트폴리오 관리</td><td>투자 5년+, Financial Modelling, 영어, (우대)CPA·PE/VC</td><td><span class="chip mid">중상</span></td><td><span class="chip lo">최상</span></td><td><span class="chip lo">매우높</span></td><td><span class="chip lo">낮음</span></td></tr>
+      <tr><td class="bu">Staff</td><td class="job">경영기획</td><td class="loc">분당</td><td>메모리 시장 Market Intelligence·미래 경영전략 수립</td><td>전략/기획 5년+, <b>준 native 중국어</b>, C-Level 커뮤</td><td><span class="chip mid">중상</span></td><td><span class="chip lo">최상</span></td><td><span class="chip lo">매우높</span></td><td><span class="chip lo">낮음</span></td></tr>
+
+    </tbody>
+  </table></div>
+  <div class="disclaimer">HBM/DRAM/NAND/Solution 설계·SHE·시공은 유사 세부직무를 한 행으로 묶었다. 설계 계열은 선호 최상이나 요건이 반도체 <u>설계</u> 5년급이라 디스플레이·공정 출신 대군은 지원 불가 → 유효경쟁은 설계 경력자끼리라 합격확률 ‘중’.</div>
+
+  <h2 class="sec">🎯 한눈 결론</h2>
+  <div class="grid g3">
+    <div class="card rank1"><h4>1위 · 설비 Infra (건설/플랜트)</h4>
+      <ul class="clean">
+        <li><b>Utility 수처리</b>(환경/토목 7년+) 유효 지원자 극소수 → 합격확률 최상</li>
+        <li>시공·설계·사업관리: 건축/기계/전기/화공 전공+건설 경력 필수</li>
+        <li>반도체/디스플레이 대군은 지원 자체 불가</li>
+      </ul></div>
+    <div class="card rank2"><h4>2위 · 안전보건환경(SHE)</h4>
+      <ul class="clean">
+        <li>안전/화공/가스/전기·보건 <b>기사 자격증</b>이 진입장벽</li>
+        <li>안전공학·산업보건 전공자만 지원 → 기술직 인파와 무관</li>
+        <li>선호 낮음 + 다수 사이트 채용 → 합격확률 높음</li>
+      </ul></div>
+    <div class="card rank3"><h4>3위 · 특화 SW·보안·물류</h4>
+      <ul class="clean">
+        <li><b>보안(CERT/Red Team)</b>·<b>Application HW/TEST</b>·<b>CAD Eng</b>: SW/EDA/보안 특화 풀</li>
+        <li><b>물류/자재관리</b>: Junior·비인기</li>
+        <li>반도체 설계·공정 인파와 경쟁 분리</li>
+      </ul></div>
+  </div>
+
+  <div class="disclaimer" style="margin-top:14px">
+    ※ 근무강도·선호도·경쟁률·합격확률은 <b>공개 J/D + 시장 통념 기반 정성 추정</b>이다. 실제 TO·지원자 수는 비공개이며 회차별로 달라질 수 있다.
+  </div>
+
+  <footer>hy 경력채용 모집분야 통합 분석표 · 첨부 J/D 4종 전수 반영 · 회사명 마스킹(hy) · 정성 추정(비공식) · 2026-07-01</footer>
+</div>
+
+<script>
+  const PIN="0001";
+  const lock=document.getElementById('lock'), wrap=document.querySelector('.wrap'),
+        pin=document.getElementById('pin'), msg=document.getElementById('lkmsg');
+  function open_(){lock.classList.add('gate-hidden');wrap.classList.remove('gate-hidden');document.body.classList.remove('locked');}
+  function unlock(){ if(pin.value===PIN){sessionStorage.setItem('hy_ok','1');open_();}
+    else{msg.textContent="PIN이 올바르지 않습니다.";pin.value="";pin.focus();} }
+  if(sessionStorage.getItem('hy_ok')==='1'){open_();} else {setTimeout(()=>pin.focus(),100);}
+  document.getElementById('unlock').addEventListener('click',unlock);
+  pin.addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});
+</script>
+</body>
+</html>
